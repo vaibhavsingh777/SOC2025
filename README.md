@@ -1,10 +1,10 @@
 Automated Trading Strategy Optimization Using Multi-Modal Reinforcement Learning
 
-### Learning Objectives
+# Learning Objectives
 
 Hello! In this project, I have explored some basic machine learning techniques(specifically using RL) for stock market data. Let me break down what I have done, part by part, in my own words.
 
-1. Understanding and Implementing Linear Regression, Logistic Regression, and KNN
+1. ## Understanding and Implementing Linear Regression, Logistic Regression, and KNN
 
    ### Linear Regression
 
@@ -32,26 +32,25 @@ Hello! In this project, I have explored some basic machine learning techniques(s
 
    One thing I observed is that KNN’s performance can be sensitive to the choice of $$k$$ and the scale of features, so I made sure to preprocess the data appropriately. I evaluated the model using accuracy and confusion matrices, which helped me compare its effectiveness with Logistic Regression. Overall, KNN gave me practical insights into how neighborhood-based classification works for stock price movement prediction.
 
-### Fetching and Processing Real Stock Data Using yfinance
+2. ## Fetching and Processing Real Stock Data Using yfinance
 
-I didn’t want to use any fake or sample data, so I used the yfinance library to download real stock data from Yahoo Finance. I tried with different tickers like AAPL, TCS.NS, RELIANCE.NS, and TSLA.
+   I wanted my analysis to be as realistic as possible, so I made it a point to use only genuine stock market data instead of any sample or synthetic datasets. For this, I relied on the yfinance library, which allowed me to directly download historical stock data from Yahoo Finance. I didn’t just stick to a few well-known tickers like AAPL or TSLA; I expanded my scope to include a diverse set of top 40 trending NSE stocks such as RELIANCE.NS, TCS.NS, HDFCBANK.NS, and many others. This gave me a broad and representative dataset covering various sectors and market caps.
 
-I fetched one year of daily data for each stock. After downloading, I checked the data, removed any missing values, and made sure it was clean and ready for analysis.
+   To ensure a comprehensive analysis, I fetched daily data starting from January 2019 up to the present day. After downloading, I carefully checked each dataset for missing or inconsistent values. If I found any gaps or anomalies, I cleaned the data by removing or correcting those entries. I also enriched the dataset by adding relevant financial metrics like market capitalization, price-to-earnings (PE) ratio, price-to-book (PB) ratio, and sector information for each stock. All this information was consolidated into a single DataFrame, which I then saved as a CSV file for easy access and reproducibility.
 
-This step helped me understand how to work with real-world data, which is usually messy and needs some cleaning before using in any model.
+   This hands-on process taught me the importance of data quality in real-world financial analysis. Working with actual market data is rarely straightforward—there are always missing values, outliers, or inconsistencies that need to be addressed before any meaningful modeling can be done. By handling these challenges myself, I gained valuable experience in data wrangling and preparation, which is a crucial step in any data science or machine learning project involving financial time series.
 
-3. Feature Engineering and Machine Learning for Prediction and Classification
-   I created new features from the existing data to make the models work better. For example, I made a new column for the next day’s closing price (for regression) and a binary target column to indicate if the price went up or down (for classification).
+3. ## Feature Engineering and Machine Learning for Prediction and Classification
 
-I split the data into training and testing sets, so that I can train the models on one part and test on another to see how well they perform.
+   To improve the predictive power of my models, I focused on feature engineering—creating new variables from the raw stock data. For regression tasks, I generated a new column representing the next day’s closing price, allowing the model to learn patterns that could forecast future values. For classification, I introduced a binary target column that indicates whether the stock price increased or decreased the following day, making it suitable for algorithms like Logistic Regression and KNN.
 
-After training the models, I checked their performance using metrics like Mean Squared Error (for regression) and Accuracy/Confusion Matrix (for classification).
+   I then divided the dataset into training and testing sets. This split is essential to ensure that the models are evaluated on unseen data, providing a realistic measure of their generalization ability. The training set is used to fit the models, while the testing set helps assess their performance.
 
-I also plotted graphs to visualize the actual vs predicted values, and confusion matrices to see where the models are making mistakes. This helped me understand the strengths and weaknesses of each approach.
+   After training, I evaluated the regression model using Mean Squared Error (MSE), which quantifies how close the predicted prices are to the actual values. For classification models, I used metrics like accuracy and the confusion matrix to understand how well the models distinguish between upward and downward movements. Additionally, I visualized the results by plotting actual versus predicted values for regression and confusion matrices for classification. These visualizations made it easier to identify where the models performed well and where they struggled, giving me deeper insights into their strengths and limitations.
 
 # Setup
 
-pip install yfinance scikit-learn pandas matplotlib seaborn
+'''pip install yfinance scikit-learn pandas matplotlib seaborn'''
 
 import yfinance as yf
 import pandas as pd
