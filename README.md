@@ -1,15 +1,22 @@
 Automated Trading Strategy Optimization Using Multi-Modal Reinforcement Learning
-Learning Objectives
-Hello! In this project, I have explored some basic machine learning techniques for stock market data. Let me break down what I have done, part by part, in my own words.
+
+- Learning Objectives
+  Hello! In this project, I have explored some basic machine learning techniques(specifically using RL) for stock market data. Let me break down what I have done, part by part, in my own words.
 
 1. Understanding and Implementing Linear Regression, Logistic Regression, and KNN
-   Linear Regression:
-   I started with Linear Regression because it is a simple and powerful method for predicting continuous values. Here, I used it to predict the next day’s closing price of a stock based on today’s data. I wanted to see how well the model can guess tomorrow’s price just by looking at today’s numbers like open, high, low, close, and volume.
+   Linear Regression
+   For this project, I chose Linear Regression as my starting point because it is a well-established and interpretable method for predicting continuous values. I used today’s open, high, low, close, and volume as input features to estimate the next day’s closing price. The underlying assumption is that there is a linear relationship between these features and the target price, which can be represented as: $$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_n x_n + \epsilon$$
 
-Logistic Regression:
+Here,
+y
+y is the predicted closing price, and x1 to xn are the selected features. I selected these particular variables because, from my understanding and research, they capture the essential daily market dynamics. I trained the model using historical stock data, applying the Ordinary Least Squares (OLS) method to minimize prediction errors.
+
+One advantage I found with Linear Regression is its interpretability—the coefficients directly indicate how each feature influences the next day’s price. To evaluate the model, I used Mean Squared Error (MSE), which helped me measure the accuracy of my predictions. Overall, this approach gave me a strong baseline for stock price forecasting.
+
+Logistic Regression
 After that, I moved to Logistic Regression. This one is mainly for classification problems. So, I used it to predict whether the stock price will go up or down the next day. I converted the problem into a simple yes/no (1/0) type, and trained the model to classify the movement.
 
-K-Nearest Neighbors (KNN):
+K-Nearest Neighbors (KNN)
 Then, I tried KNN, which is a very intuitive algorithm. It looks at the ‘k’ closest data points and decides the class based on majority. I used KNN to classify the price movement, and also experimented with different values of ‘k’ to see which one works best.
 
 2. Fetching and Processing Real Stock Data Using yfinance
@@ -32,42 +39,69 @@ Setup
 For this project, I used Python and installed libraries like yfinance, scikit-learn, pandas, matplotlib, and seaborn.
 
 If you want to try this out, just make sure to install these packages before running the code.
-maybe later on if i get time i will include all these in a requirements.txt file seperately
 
-Setup
+Maybe later on, if I get time, I will include all these in a requirements.txt file separately.
+
+Quick Install:
+
+bash
 pip install yfinance scikit-learn pandas matplotlib seaborn
-
-import yfinance as yf import pandas as pd import numpy as np import matplotlib.pyplot as plt import seaborn as sns from sklearn.linear_model import LinearRegression, LogisticRegression from sklearn.neighbors import KNeighborsClassifier from sklearn.metrics import mean_squared_error, accuracy_score, confusion_matrix from sklearn.model_selection import train_test_split
-
+Project Workflow
 Part 1: Downloading Stock Data
-Task 1.1: Fetch 1-Year Daily Data ticker = "AAPL" # You can also try "TCS.NS", "RELIANCE.NS", "TSLA", etc. data = yf.download(ticker, period="1y") data.head()
+Task: Fetch 1-Year Daily Data
+Example:
+
+Ticker: "AAPL" (You can also try "TCS.NS", "RELIANCE.NS", "TSLA", etc.)
+
+Downloaded using yfinance and checked the data.
 
 Part 2: Linear Regression – Predicting Next Day’s Close Price
-Task 2.1: Create Target Variable data["Next_Close"] = data["Close"].shift(-1) data.dropna(inplace=True) Task 2.2: Train Linear Regression Model features = ['Open', 'High', 'Low', 'Close', 'Volume'] X = data[features] y = data["Next_Close"]
+Task 1: Create Target Variable
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
+Made a new column for next day’s close price and cleaned the data.
 
-lr_model = LinearRegression() lr_model.fit(X_train, y_train) y_pred = lr_model.predict(X_test)
+Task 2: Train Linear Regression Model
 
-print("MSE:", mean_squared_error(y_test, y_pred)) Task 2.3: Plot Actual vs Predicted plt.plot(y_test.values, label='Actual') plt.plot(y_pred, label='Predicted') plt.legend() plt.title('Linear Regression - Next Day Close Price') plt.show()
+Used features like Open, High, Low, Close, Volume.
+
+Split data into train and test sets.
+
+Trained the model and checked Mean Squared Error.
+
+Task 3: Plot Actual vs Predicted
+
+Plotted graphs to compare actual and predicted prices.
 
 Part 3: Logistic Regression – Predicting Price Movement
-Task 3.1: Define Binary Target data["Target"] = (data["Next_Close"] > data["Close"]).astype(int) Task 3.2: Train Logistic Regression Model X = data[features] y = data["Target"]
+Task 1: Define Binary Target
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
+Created a column to indicate if price went up or down.
 
-log_model = LogisticRegression(max_iter=1000) log_model.fit(X_train, y_train) y_pred = log_model.predict(X_test)
+Task 2: Train Logistic Regression Model
 
-print("Accuracy:", accuracy_score(y_test, y_pred)) print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred)) #Part 4: K-Nearest Neighbors (KNN) Classification Task 4.1: Evaluate KNN for Various K Values python Copy Edit for k in [3, 5, 7]: knn = KNeighborsClassifier(n_neighbors=k) knn.fit(X_train, y_train) y_pred_knn = knn.predict(X_test) acc = accuracy_score(y_test, y_pred_knn) print(f"K={k}, Accuracy={acc}") #Bonus Tasks Add technical indicators (e.g., moving averages, RSI) and observe accuracy change
+Used the same features, split data, trained the model.
 
-Plot confusion matrix heatmap using seaborn.heatmap
+Checked accuracy and confusion matrix.
 
-Apply PCA before running KNN to reduce dimensions
+Part 4: K-Nearest Neighbors (KNN) Classification
+Task: Evaluate KNN for Various K Values
 
-#Compare all three models in a markdown summary
+Tried different values of k (like 3, 5, 7) and checked which one gives best accuracy.
+
+Bonus Tasks (Optional)
+Added technical indicators (like moving averages, RSI) and observed how accuracy changes.
+
+Plotted confusion matrix heatmap using seaborn for better visualization.
+
+Applied PCA before running KNN to reduce dimensions.
+
+Compared all three models in a markdown summary.
 
 Submission Checklist
 Code for Linear Regression with performance plot
+
 Code for Logistic Regression with confusion matrix
+
 Code for KNN with varying k values
+
 Answered bonus questions (optional)
