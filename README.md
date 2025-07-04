@@ -66,35 +66,35 @@ from sklearn.model_selection import train_test_split
 
 # Part 1: Downloading Stock Data
 
-Task 1.1: Fetch 1-Year Daily Data
-ticker = "AAPL" # You can also try "TCS.NS", "RELIANCE.NS", "TSLA", etc.
-data = yf.download(ticker, period="1y")
-data.head()
+1. Task 1.1: Fetch 1-Year Daily Data
+   ticker = "AAPL" # You can also try "TCS.NS", "RELIANCE.NS", "TSLA", etc.
+   data = yf.download(ticker, period="1y")
+   data.head()
 
 # Part 2: Linear Regression – Predicting Next Day’s Close Price
 
-1. Task 2.1: Create Target Variable
-   data["Next_Close"] = data["Close"].shift(-1)
+1. Task 2.1: Create Target Variable<br>
+   data["Next_Close"] = data["Close"].shift(-1)<br>
    data.dropna(inplace=True)
 
-2. Task 2.2: Train Linear Regression Model
-   features = ['Open', 'High', 'Low', 'Close', 'Volume']
-   X = data[features]
-   y = data["Next_Close"]
+2. Task 2.2: Train Linear Regression Model<br>
+   features = ['Open', 'High', 'Low', 'Close', 'Volume']<br>
+   X = data[features]<br>
+   y = data["Next_Close"]<br>
 
    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
 
-   lr_model = LinearRegression()
-   lr_model.fit(X_train, y_train)
+   lr_model = LinearRegression()<br>
+   lr_model.fit(X_train, y_train)<br>
    y_pred = lr_model.predict(X_test)
 
    print("MSE:", mean_squared_error(y_test, y_pred))
 
-3. Task 2.3: Plot Actual vs Predicted
-   plt.plot(y_test.values, label='Actual')
-   plt.plot(y_pred, label='Predicted')
-   plt.legend()
-   plt.title('Linear Regression - Next Day Close Price')
+3. Task 2.3: Plot Actual vs Predicted<br>
+   plt.plot(y_test.values, label='Actual')<br>
+   plt.plot(y_pred, label='Predicted')<br>
+   plt.legend()<br>
+   plt.title('Linear Regression - Next Day Close Price')<br>
    plt.show()
 
 # Part 3: Logistic Regression – Predicting Price Movement
