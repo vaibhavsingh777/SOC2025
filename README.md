@@ -20,9 +20,7 @@ Hello! In this project, I have explored some basic machine learning techniques(s
 
    Logistic Regression models the probability that a given input belongs to a particular class using the logistic (sigmoid) function. The mathematical form is:
 
-   $$
-   P(y=1|X) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n)}}
-   $$
+   $$P(y=1|X) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n)}}$$
 
    Here, $$P(y=1|X)$$ is the probability that the price will go up, and the $$\beta$$ coefficients are learned from the data. I trained the model using the same features as before and evaluated its performance using accuracy and the confusion matrix, which shows how well the model distinguishes between up and down movements. Logistic Regression is particularly useful because it provides probabilistic outputs and is less sensitive to outliers compared to linear regression. This method helped me understand the likelihood of price movement direction and served as a solid approach for binary classification in financial data.
 
