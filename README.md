@@ -2,13 +2,13 @@ Automated Trading Strategy Optimization Using Multi-Modal Reinforcement Learning
 
 # Learning Objectives
 
-Hello! In this project, I have explored some basic machine learning techniques(specifically using RL) for stock market data. Let me break down what I have done, part by part, in my own words.
+Hello! In this project, I have explored some basic machine learning techniques(till now i have only studied regression so I will only write about that for now, right now a meet is being conducted today evening where the research paper I am currently reading will be discussed with my mentor and together he will guide me for how to proceed further on this topic) for stock market data. Let me break down what I have done, part by part, in my own words.
 
 1. ## Understanding and Implementing Linear Regression, Logistic Regression, and KNN
 
    ### Linear Regression
 
-   For this project, I chose Linear Regression as my starting point because it is a well-established and interpretable method for predicting continuous values. I used today’s open, high, low, close, and volume as input features to estimate the next day’s closing price. The underlying assumption is that there is a linear relationship between these features and the target price, which can be represented as: $$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_n x_n + \epsilon$$
+   For this project, I chose Linear Regression as my starting point because it is a well-established and interpretable method for predicting continuous values. I used today’s open, high, low, close, and volume as input features to estimate the next day’s closing price. The underlying assumption is that there is a linear relationship between these features and the target price, which can be shown in terms of an equation like: $$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_n x_n + \epsilon$$
 
    Here, y is the predicted closing price, and $x_1$ to $x_n$ are the selected features. I selected these particular variables because, from my understanding and research, they capture the essential daily market dynamics. I trained the model using historical stock data, applying the Ordinary Least Squares (OLS) method to minimize prediction errors.
 
@@ -32,6 +32,8 @@ Hello! In this project, I have explored some basic machine learning techniques(s
 
    One thing I observed is that KNN’s performance can be sensitive to the choice of $$k$$ and the scale of features, so I made sure to preprocess the data appropriately. I evaluated the model using accuracy and confusion matrices, which helped me compare its effectiveness with Logistic Regression. Overall, KNN gave me practical insights into how neighborhood-based classification works for stock price movement prediction.
 
+   Currently i am reading more on the topic so that i will be able to implement the research paper that is provided by my mentor Onkar Bhaiya.
+
 2. ## Fetching and Processing Real Stock Data Using yfinance
 
    I wanted my analysis to be as realistic as possible, so I made it a point to use only genuine stock market data instead of any sample or synthetic datasets. For this, I relied on the yfinance library, which allowed me to directly download historical stock data from Yahoo Finance. I didn’t just stick to a few well-known tickers like AAPL or TSLA; I expanded my scope to include a diverse set of top 40 trending NSE stocks such as RELIANCE.NS, TCS.NS, HDFCBANK.NS, and many others. This gave me a broad and representative dataset covering various sectors and market caps.
@@ -50,7 +52,7 @@ Hello! In this project, I have explored some basic machine learning techniques(s
 
 # Setup
 
-'''pip install yfinance scikit-learn pandas matplotlib seaborn'''
+<pre> ``` pip install yfinance scikit-learn pandas matplotlib seaborn ``` </pre>
 
 import yfinance as yf
 import pandas as pd
