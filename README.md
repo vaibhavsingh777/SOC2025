@@ -1,24 +1,42 @@
 Automated Trading Strategy Optimization Using Multi-Modal Reinforcement Learning
 
-- Learning Objectives
-  Hello! In this project, I have explored some basic machine learning techniques(specifically using RL) for stock market data. Let me break down what I have done, part by part, in my own words.
+### Learning Objectives
+
+Hello! In this project, I have explored some basic machine learning techniques(specifically using RL) for stock market data. Let me break down what I have done, part by part, in my own words.
 
 1. Understanding and Implementing Linear Regression, Logistic Regression, and KNN
-   Linear Regression
+
+   ### Linear Regression
+
    For this project, I chose Linear Regression as my starting point because it is a well-established and interpretable method for predicting continuous values. I used today’s open, high, low, close, and volume as input features to estimate the next day’s closing price. The underlying assumption is that there is a linear relationship between these features and the target price, which can be represented as: $$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_n x_n + \epsilon$$
 
-Here, y is the predicted closing price, and $x_1$ to $x_n$ are the selected features. I selected these particular variables because, from my understanding and research, they capture the essential daily market dynamics. I trained the model using historical stock data, applying the Ordinary Least Squares (OLS) method to minimize prediction errors.
+   Here, y is the predicted closing price, and $x_1$ to $x_n$ are the selected features. I selected these particular variables because, from my understanding and research, they capture the essential daily market dynamics. I trained the model using historical stock data, applying the Ordinary Least Squares (OLS) method to minimize prediction errors.
 
-One advantage I found with Linear Regression is its interpretability—the coefficients directly indicate how each feature influences the next day’s price. To evaluate the model, I used Mean Squared Error (MSE), which helped me measure the accuracy of my predictions. Overall, this approach gave me a strong baseline for stock price forecasting.
+   One advantage I found with Linear Regression is its interpretability—the coefficients directly indicate how each feature influences the next day’s price. To evaluate the model, I used Mean Squared Error (MSE), which helped me measure the accuracy of my predictions. Overall, this approach gave me a strong baseline for stock price forecasting.
 
-Logistic Regression
-After that, I moved to Logistic Regression. This one is mainly for classification problems. So, I used it to predict whether the stock price will go up or down the next day. I converted the problem into a simple yes/no (1/0) type, and trained the model to classify the movement.
+   ### Logistic Regression
 
-K-Nearest Neighbors (KNN)
-Then, I tried KNN, which is a very intuitive algorithm. It looks at the ‘k’ closest data points and decides the class based on majority. I used KNN to classify the price movement, and also experimented with different values of ‘k’ to see which one works best.
+   After working with regression, I moved to Logistic Regression, which is mainly used for classification tasks. In this project, I used Logistic Regression to predict whether the stock price will go up or down the next day. I transformed the problem into a binary classification by creating a target variable: if the next day’s closing price is higher than today’s, it is labeled as 1 (up); otherwise, it is 0 (down).
 
-2. Fetching and Processing Real Stock Data Using yfinance
-   I didn’t want to use any fake or sample data, so I used the yfinance library to download real stock data from Yahoo Finance. I tried with different tickers like AAPL, TCS.NS, RELIANCE.NS, and TSLA.
+   Logistic Regression models the probability that a given input belongs to a particular class using the logistic (sigmoid) function. The mathematical form is:
+
+   $$
+   P(y=1|X) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \ldots + \beta_n x_n)}}
+   $$
+
+   Here, $$P(y=1|X)$$ is the probability that the price will go up, and the $$\beta$$ coefficients are learned from the data. I trained the model using the same features as before and evaluated its performance using accuracy and the confusion matrix, which shows how well the model distinguishes between up and down movements. Logistic Regression is particularly useful because it provides probabilistic outputs and is less sensitive to outliers compared to linear regression. This method helped me understand the likelihood of price movement direction and served as a solid approach for binary classification in financial data.
+
+   ### K-Nearest Neighbors (KNN)
+
+   Next, I explored the K-Nearest Neighbors (KNN) algorithm, which is a non-parametric and instance-based learning method. KNN classifies a new data point based on the majority class among its ‘k’ closest neighbors in the feature space. For this project, I used KNN to classify whether the stock price would go up or down the next day, using the same set of features.
+
+   The main idea is simple: for each test instance, the algorithm calculates the distance (usually Euclidean) to all training points, finds the ‘k’ nearest ones, and assigns the class that is most common among them. I experimented with different values of $$k$$ (like 3, 5, and 7) to see which provided the best classification accuracy. KNN is intuitive and does not make strong assumptions about the underlying data distribution, making it flexible for various types of datasets.
+
+   One thing I observed is that KNN’s performance can be sensitive to the choice of $$k$$ and the scale of features, so I made sure to preprocess the data appropriately. I evaluated the model using accuracy and confusion matrices, which helped me compare its effectiveness with Logistic Regression. Overall, KNN gave me practical insights into how neighborhood-based classification works for stock price movement prediction.
+
+### Fetching and Processing Real Stock Data Using yfinance
+
+I didn’t want to use any fake or sample data, so I used the yfinance library to download real stock data from Yahoo Finance. I tried with different tickers like AAPL, TCS.NS, RELIANCE.NS, and TSLA.
 
 I fetched one year of daily data for each stock. After downloading, I checked the data, removed any missing values, and made sure it was clean and ready for analysis.
 
