@@ -99,39 +99,41 @@ from sklearn.model_selection import train_test_split
 
 # Part 3: Logistic Regression – Predicting Price Movement
 
-Task 3.1: Define Binary Target
-data["Target"] = (data["Next_Close"] > data["Close"]).astype(int)
-Task 3.2: Train Logistic Regression Model
-X = data[features]
-y = data["Target"]
+1. Task 3.1: Define Binary Target<br>
+   data["Target"] = (data["Next_Close"] > data["Close"]).astype(int)<br>
+   Task 3.2: Train Logistic Regression Model<br>
+   X = data[features]<br>
+   y = data["Target"]
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
+   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
 
-log_model = LogisticRegression(max_iter=1000)
-log_model.fit(X_train, y_train)
-y_pred = log_model.predict(X_test)
+   log_model = LogisticRegression(max_iter=1000)<br>
+   log_model.fit(X_train, y_train)<br>
+   y_pred = log_model.predict(X_test)<br>
 
-print("Accuracy:", accuracy_score(y_test, y_pred))
-print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
-#Part 4: K-Nearest Neighbors (KNN) Classification
-Task 4.1: Evaluate KNN for Various K Values
-python
-Copy
-Edit
-for k in [3, 5, 7]:
-knn = KNeighborsClassifier(n_neighbors=k)
-knn.fit(X_train, y_train)
-y_pred_knn = knn.predict(X_test)
-acc = accuracy_score(y_test, y_pred_knn)
-print(f"K={k}, Accuracy={acc}")
-#Bonus Tasks
-Add technical indicators (e.g., moving averages, RSI) and observe accuracy change
+   print("Accuracy:", accuracy_score(y_test, y_pred))<br>
+   print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))<br>
 
-Plot confusion matrix heatmap using seaborn.heatmap
+# Part 4: K-Nearest Neighbors (KNN) Classification
 
+1. Task 4.1: Evaluate KNN for Various K Values<br>
+   python<br>
+   Copy<br>
+   Edit<br>
+   for k in [3, 5, 7]:<br>
+   knn = KNeighborsClassifier(n_neighbors=k)<br>
+   knn.fit(X_train, y_train)<br>
+   y_pred_knn = knn.predict(X_test)<br>
+   acc = accuracy_score(y_test, y_pred_knn)<br>
+   print(f"K={k}, Accuracy={acc}")
+
+# Bonus Tasks
+
+Add technical indicators (e.g., moving averages, RSI) and observe accuracy change<br>
+Plot confusion matrix heatmap using seaborn.heatmap<br>
 Apply PCA before running KNN to reduce dimensions
 
-#Compare all three models in a markdown summary
+# Compare all three models in a markdown summary
 
 1.  Submission Checklist
 2.  Code for Linear Regression with performance plot
