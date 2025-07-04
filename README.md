@@ -73,27 +73,29 @@ data.head()
 
 # Part 2: Linear Regression – Predicting Next Day’s Close Price
 
-Task 2.1: Create Target Variable
-data["Next_Close"] = data["Close"].shift(-1)
-data.dropna(inplace=True)
-Task 2.2: Train Linear Regression Model
-features = ['Open', 'High', 'Low', 'Close', 'Volume']
-X = data[features]
-y = data["Next_Close"]
+1. Task 2.1: Create Target Variable
+   data["Next_Close"] = data["Close"].shift(-1)
+   data.dropna(inplace=True)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
+2. Task 2.2: Train Linear Regression Model
+   features = ['Open', 'High', 'Low', 'Close', 'Volume']
+   X = data[features]
+   y = data["Next_Close"]
 
-lr_model = LinearRegression()
-lr_model.fit(X_train, y_train)
-y_pred = lr_model.predict(X_test)
+   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
 
-print("MSE:", mean_squared_error(y_test, y_pred))
-Task 2.3: Plot Actual vs Predicted
-plt.plot(y_test.values, label='Actual')
-plt.plot(y_pred, label='Predicted')
-plt.legend()
-plt.title('Linear Regression - Next Day Close Price')
-plt.show()
+   lr_model = LinearRegression()
+   lr_model.fit(X_train, y_train)
+   y_pred = lr_model.predict(X_test)
+
+   print("MSE:", mean_squared_error(y_test, y_pred))
+
+3. Task 2.3: Plot Actual vs Predicted
+   plt.plot(y_test.values, label='Actual')
+   plt.plot(y_pred, label='Predicted')
+   plt.legend()
+   plt.title('Linear Regression - Next Day Close Price')
+   plt.show()
 
 # Part 3: Logistic Regression – Predicting Price Movement
 
