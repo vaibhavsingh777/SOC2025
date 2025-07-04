@@ -51,73 +51,89 @@ After training the models, I checked their performance using metrics like Mean S
 
 I also plotted graphs to visualize the actual vs predicted values, and confusion matrices to see where the models are making mistakes. This helped me understand the strengths and weaknesses of each approach.
 
-Setup
-For this project, I used Python and installed libraries like yfinance, scikit-learn, pandas, matplotlib, and seaborn.
+# Setup
 
-If you want to try this out, just make sure to install these packages before running the code.
-
-Maybe later on, if I get time, I will include all these in a requirements.txt file separately.
-
-Quick Install:
-
-bash
 pip install yfinance scikit-learn pandas matplotlib seaborn
-Project Workflow
-Part 1: Downloading Stock Data
-Task: Fetch 1-Year Daily Data
-Example:
 
-Ticker: "AAPL" (You can also try "TCS.NS", "RELIANCE.NS", "TSLA", etc.)
+import yfinance as yf
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import mean_squared_error, accuracy_score, confusion_matrix
+from sklearn.model_selection import train_test_split
 
-Downloaded using yfinance and checked the data.
+# Part 1: Downloading Stock Data
 
-Part 2: Linear Regression – Predicting Next Day’s Close Price
-Task 1: Create Target Variable
+Task 1.1: Fetch 1-Year Daily Data
+ticker = "AAPL" # You can also try "TCS.NS", "RELIANCE.NS", "TSLA", etc.
+data = yf.download(ticker, period="1y")
+data.head()
 
-Made a new column for next day’s close price and cleaned the data.
+# Part 2: Linear Regression – Predicting Next Day’s Close Price
 
-Task 2: Train Linear Regression Model
+Task 2.1: Create Target Variable
+data["Next_Close"] = data["Close"].shift(-1)
+data.dropna(inplace=True)
+Task 2.2: Train Linear Regression Model
+features = ['Open', 'High', 'Low', 'Close', 'Volume']
+X = data[features]
+y = data["Next_Close"]
 
-Used features like Open, High, Low, Close, Volume.
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
 
-Split data into train and test sets.
+lr_model = LinearRegression()
+lr_model.fit(X_train, y_train)
+y_pred = lr_model.predict(X_test)
 
-Trained the model and checked Mean Squared Error.
+print("MSE:", mean_squared_error(y_test, y_pred))
+Task 2.3: Plot Actual vs Predicted
+plt.plot(y_test.values, label='Actual')
+plt.plot(y_pred, label='Predicted')
+plt.legend()
+plt.title('Linear Regression - Next Day Close Price')
+plt.show()
 
-Task 3: Plot Actual vs Predicted
+# Part 3: Logistic Regression – Predicting Price Movement
 
-Plotted graphs to compare actual and predicted prices.
+Task 3.1: Define Binary Target
+data["Target"] = (data["Next_Close"] > data["Close"]).astype(int)
+Task 3.2: Train Logistic Regression Model
+X = data[features]
+y = data["Target"]
 
-Part 3: Logistic Regression – Predicting Price Movement
-Task 1: Define Binary Target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
 
-Created a column to indicate if price went up or down.
+log_model = LogisticRegression(max_iter=1000)
+log_model.fit(X_train, y_train)
+y_pred = log_model.predict(X_test)
 
-Task 2: Train Logistic Regression Model
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+#Part 4: K-Nearest Neighbors (KNN) Classification
+Task 4.1: Evaluate KNN for Various K Values
+python
+Copy
+Edit
+for k in [3, 5, 7]:
+knn = KNeighborsClassifier(n_neighbors=k)
+knn.fit(X_train, y_train)
+y_pred_knn = knn.predict(X_test)
+acc = accuracy_score(y_test, y_pred_knn)
+print(f"K={k}, Accuracy={acc}")
+#Bonus Tasks
+Add technical indicators (e.g., moving averages, RSI) and observe accuracy change
 
-Used the same features, split data, trained the model.
+Plot confusion matrix heatmap using seaborn.heatmap
 
-Checked accuracy and confusion matrix.
+Apply PCA before running KNN to reduce dimensions
 
-Part 4: K-Nearest Neighbors (KNN) Classification
-Task: Evaluate KNN for Various K Values
+#Compare all three models in a markdown summary
 
-Tried different values of k (like 3, 5, 7) and checked which one gives best accuracy.
-
-Bonus Tasks (Optional)
-Added technical indicators (like moving averages, RSI) and observed how accuracy changes.
-
-Plotted confusion matrix heatmap using seaborn for better visualization.
-
-Applied PCA before running KNN to reduce dimensions.
-
-Compared all three models in a markdown summary.
-
-Submission Checklist
-Code for Linear Regression with performance plot
-
-Code for Logistic Regression with confusion matrix
-
-Code for KNN with varying k values
-
-Answered bonus questions (optional)
+1.  Submission Checklist
+2.  Code for Linear Regression with performance plot
+3.  Code for Logistic Regression with confusion matrix
+4.  Code for KNN with varying k values
+5.  Answered bonus questions (optional)
