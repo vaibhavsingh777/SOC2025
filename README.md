@@ -7,9 +7,7 @@ Automated Trading Strategy Optimization Using Multi-Modal Reinforcement Learning
    Linear Regression
    For this project, I chose Linear Regression as my starting point because it is a well-established and interpretable method for predicting continuous values. I used today’s open, high, low, close, and volume as input features to estimate the next day’s closing price. The underlying assumption is that there is a linear relationship between these features and the target price, which can be represented as: $$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_n x_n + \epsilon$$
 
-Here,
-y
-y is the predicted closing price, and x1 to xn are the selected features. I selected these particular variables because, from my understanding and research, they capture the essential daily market dynamics. I trained the model using historical stock data, applying the Ordinary Least Squares (OLS) method to minimize prediction errors.
+Here, y is the predicted closing price, and $$x_1 to x_n$$ are the selected features. I selected these particular variables because, from my understanding and research, they capture the essential daily market dynamics. I trained the model using historical stock data, applying the Ordinary Least Squares (OLS) method to minimize prediction errors.
 
 One advantage I found with Linear Regression is its interpretability—the coefficients directly indicate how each feature influences the next day’s price. To evaluate the model, I used Mean Squared Error (MSE), which helped me measure the accuracy of my predictions. Overall, this approach gave me a strong baseline for stock price forecasting.
 
