@@ -1,25 +1,5 @@
 Automated Trading Strategy Optimization Using Multi-Modal Reinforcement Learning
 Learning Objectives
-Hello! In this project, I have tried to learn and apply some basic machine learning techniques for stock market data. Let me explain what all I have done here:
-
-Understanding and Implementing Linear Regression, Logistic Regression, and KNN:
-First, I wanted to get comfortable with these three famous algorithms. So, I have taken Linear Regression for predicting next day’s stock price, Logistic Regression for checking if the price will go up or down, and K-Nearest Neighbors (KNN) for classifying the price movement. I have implemented all these step by step.
-
-Fetching and Processing Real Stock Data using yfinance:
-Instead of using some dummy data, I thought, “Why not use real stock market data only?” So, I have used the yfinance library to download daily stock prices for one year. I tried with AAPL, TCS, Reliance and all. After downloading, I did some cleaning and made it ready for the models.
-
-Feature Engineering and Machine Learning for Prediction and Classification:
-For getting better results, I have created some new features from the data, like next day’s close price and binary target for up/down movement. After that, I trained the models and checked how well they are predicting. I also plotted graphs to see the results clearly.
-
-Setup
-For running this project, I have used Python and installed some libraries like yfinance, scikit-learn, pandas, matplotlib, and seaborn. If you are trying this, just make sure to install these packages.
-
-Let me know if you want a more detailed description for each part, or if you want the rest of the README in this style!
-
-elaborate on each point more part wise
-elaborate on each point more part wise
-Automated Trading Strategy Optimization Using Multi-Modal Reinforcement Learning
-Learning Objectives
 Hello! In this project, I have explored some basic machine learning techniques for stock market data. Let me break down what I have done, part by part, in my own words.
 
 1. Understanding and Implementing Linear Regression, Logistic Regression, and KNN
@@ -52,6 +32,7 @@ Setup
 For this project, I used Python and installed libraries like yfinance, scikit-learn, pandas, matplotlib, and seaborn.
 
 If you want to try this out, just make sure to install these packages before running the code.
+maybe later on if i get time i will include all these in a requirements.txt file seperately
 
 Setup
 pip install yfinance scikit-learn pandas matplotlib seaborn
