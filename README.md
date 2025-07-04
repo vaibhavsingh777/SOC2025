@@ -52,7 +52,7 @@ Hello! In this project, I have explored some basic machine learning techniques(t
 
 # Setup
 
-<pre> ``` pip install yfinance scikit-learn pandas matplotlib seaborn ``` </pre>
+<pre>  pip install yfinance scikit-learn pandas matplotlib seaborn </pre>
 
 import yfinance as yf
 import pandas as pd
